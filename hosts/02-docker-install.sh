@@ -8,7 +8,7 @@ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/dock
 
 sudo yum makecache -y fast
 
-sudo yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
 
 sudo systemctl start docker
 sudo systemctl enable docker

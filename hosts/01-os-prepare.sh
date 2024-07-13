@@ -11,5 +11,8 @@ fi
 
 sudo getenforce
 
+ssh-keygen -q -t rsa -f ~/.ssh/id_rsa -N "" <<< y > /dev/null
+rm -f ~/.ssh/known_hosts
+
 sudo reboot
 
