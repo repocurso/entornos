@@ -1,5 +1,8 @@
 http://repocurso:8081/
 
-Eliminar todos
-Crear repocurso
-Credenciales
+Credenciales: admin / container@13
+
+Eliminar todos los repositorios
+
+Crear repocurso HTTP: 9091
+
