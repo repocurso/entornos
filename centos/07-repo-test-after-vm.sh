@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo Repository Demo...
-ssh vagrant@ubuntu sh -c 'cat << EOT | sh -
+ssh vagrant@centos sh -c 'cat << EOT | sh -
 echo -n "192.168.100.200:9091 Connecting: "
 docker login 192.168.100.200:9091 --username admin --password container@13 2> /dev/null
 echo -n "repocurso:9091 Connecting: "
