@@ -20,7 +20,9 @@ docker rmi repocurso:9091/hello-world 192.168.100.200:9091/hello-world > /dev/nu
 echo
 docker images
 
-jq -c . ~/.docker/config.json > ~/curso/entornos/host/data/config.json
+export DIR=$(pwd)
+if [ ! -d "$DIR/data" ]; then mkdir -p $DIR/data; fi
+if [ ! -f "$DIR/data/config.json" ]; then jq -c . $HOME/.docker/config.json > $DIR/data/config.json; fi
 
 echo
 docker logout repocurso:9091

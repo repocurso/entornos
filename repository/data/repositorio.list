@@ -1,11 +1,3 @@
-#!/bin/bash
-
-# ----- Upload imagenes
-
-export DIR=$(pwd)
-if [ ! -d "$DIR/data" ]; then mkdir -p $DIR/data && cd $DIR/data; fi
-
-cat > repositorio.list << EOT
 repocurso/alpine:3.20
 repocurso/alpine:3.19
 repocurso/alpine:latest
@@ -81,29 +73,3 @@ repocurso/ubuntu:latest
 repocurso/ubuntu-slim:0.1
 repocurso/web-app:1.0.1
 repocurso/whalesay:latest
-EOT
-
-# -----------------------------------------------------------------
-
-cat > repositorio_upload.sh << EOT
-#!/bin/bash
-
-docker login -u admin -p container@13 repocurso:9091
-
-for imagen in \$(cat repositorio.list); do
- docker pull \$imagen;
- docker tag \$imagen repocurso:9091/\$(basename \$imagen);
- docker push repocurso:9091/\$(basename \$imagen);
- docker rmi \$imagen;
- docker rmi repocurso:9091/\$(basename \$imagen);
- sleep 5;
-done
-docker logout repocurso:9091
-EOT
-
-chmod +x repositorio_upload.sh
-
-./repositorio_upload.sh
-
-cd $DIR && rm -rf $DIR/data
-

@@ -1,8 +1,24 @@
 http://repocurso:8081/
 
+# ---------
+
+ssh vagrant@repocurso docker exec nexus cat /nexus-data/admin.password
+ssh vagrant@repocurso docker logs -f nexus
+
+
+# ---------
+
 Credenciales: admin / container@13
+
+x Disable anonymous access
+
+# ---------
 
 Eliminar todos los repositorios
 
-Crear repocurso HTTP: 9091
+Crear repositorio:
+
+docker (hosted)
+Name: repocurso 
+HTTP: 9091
 

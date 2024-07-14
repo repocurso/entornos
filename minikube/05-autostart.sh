@@ -8,6 +8,8 @@ sleep 30
 minikube start 
 EOT
 
+chmod 777 ~/curso/scripts/start-minikube.sh
+
 sudo sh -c 'cat > /etc/systemd/system/start-minikube.service << EOT
 [Unit]
 Description=Start Minikube
