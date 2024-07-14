@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp ~/curso/entornos/hosts/data/config.json .
+cp ~/curso/entornos/host/data/config.json .
 
 scp vagrant@master:/home/vagrant/.kube/config kubeconfig/
 export KUBECONFIG=kubeconfig/config
@@ -11,3 +11,4 @@ kubectl create secret generic registry-credential \
 
 kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "registry-credential"}]}'
 
+rm -f config.json

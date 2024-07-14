@@ -15,3 +15,5 @@ nodes:
 - role: worker
 EOT
 
+kubectl config rename-context kind-c1 k8s-c1
+

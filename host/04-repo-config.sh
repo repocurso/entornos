@@ -20,7 +20,7 @@ docker rmi repocurso:9091/hello-world 192.168.100.200:9091/hello-world > /dev/nu
 echo
 docker images
 
-jq -c . ~/.docker/config.json > ~/curso/entornos/hosts/data/config.json
+jq -c . ~/.docker/config.json > ~/curso/entornos/host/data/config.json
 
 echo
 docker logout repocurso:9091
