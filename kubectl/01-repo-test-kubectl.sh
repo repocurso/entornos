@@ -5,7 +5,8 @@ for context in k8s-c1 k8s-c2 k8s-c3; do
   kubectl config use-context $context
   kubectl apply -f 01-repo-test-kubectl.yml 
   kubectl get pods -owide
-  sleep 15
+  kubectl wait --for=condition=Ready pod/nginx-pod
+  kubectl wait --for=condition=available deployment/nginx-deployment
   kubectl get pods -owide
   sleep 5
   kubectl delete --force -f 01-repo-test-kubectl.yml;

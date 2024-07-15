@@ -37,3 +37,76 @@ systemctl restart containerd
 EOT';
 done
 
+kubectl config use-context k8s-c1
+
+kubectl delete configmaps init-hosts-script -n kube-system
+
+cat << EOT | kubectl apply -f -
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init-hosts-script
+  namespace: kube-system
+data:
+  init-hosts.sh: |
+    #!/bin/sh
+    REPOCURSO="192.168.100.200 repocurso"
+    if ! grep -q "192.168.100.200 repocurso" /etc/hosts; then
+      echo "192.168.100.200 repocurso" >> /etc/hosts
+    fi
+EOT
+
+kubectl delete daemonset update-hosts-daemonset -n kube-system
+
+cat << EOT | kubectl apply -f -
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: update-hosts-daemonset
+  namespace: kube-system  
+  labels:
+    app: update-hosts
+spec:
+  selector:
+    matchLabels:
+      app: update-hosts
+  template:
+    metadata:
+      labels:
+        app: update-hosts
+    spec:
+      containers:
+      - name: update-hosts
+        image: busybox  
+        command:
+        - "/bin/sh"
+        - "-c"
+        - "cp /scripts/init-hosts.sh /host/init-hosts.sh && chroot /host sh /init-hosts.sh"
+        volumeMounts:
+        - name: script-volume
+          mountPath: /scripts
+        - name: host-root
+          mountPath: /host
+        securityContext:
+          privileged: true
+      volumes:
+      - name: script-volume
+        configMap:
+          name: init-hosts-script  
+      - name: host-root
+        hostPath:
+          path: /
+          type: Directory
+      tolerations:
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
+EOT
+
+
