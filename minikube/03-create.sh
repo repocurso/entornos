@@ -1,6 +1,6 @@
 #!/bin/bash
 
-minikube start --nodes 3 --driver=docker --container-runtime=docker --kubernetes-version=v1.28.3 --cni calico --insecure-registry="192.168.100.200:9091" --insecure-registry="repocurso:9091"
+minikube start --nodes 3 --driver=docker --container-runtime=docker --kubernetes-version=v1.28.3 --keep-context --cni calico --insecure-registry="192.168.100.200:9091" --insecure-registry="repocurso:9091"
 
 kubectl config rename-context minikube k8s-c2
 

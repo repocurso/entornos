@@ -6,6 +6,9 @@ cat > ~/curso/scripts/start-minikube.sh << EOT
 #!/bin/bash
 sleep 30
 minikube start 
+kubectl config delete-context k8s-c2
+kubectl config rename-context minikube k8s-c2
+kubectl config use-context k8s-c1
 EOT
 
 chmod 777 ~/curso/scripts/start-minikube.sh

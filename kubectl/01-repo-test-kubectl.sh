@@ -8,7 +8,7 @@ for context in k8s-c1 k8s-c2 k8s-c3; do
   sleep 15
   kubectl get pods -owide
   sleep 5
-  kubectl delete -f 01-repo-test-kubectl.yml;
+  kubectl delete --force -f 01-repo-test-kubectl.yml;
 done 
 
 for node in c1-control-plane c1-worker c1-worker2; do
@@ -24,7 +24,7 @@ done
 for node in minikube minikube-m02 minikube-m03; do
 minikube ssh -n $node << EOT 
 cat << EOF | sh -
-echo "========== $HOSTNAME =========="
+echo "========== $node =========="
 docker images | grep -i repocurso
 docker rmi -f repocurso:9091/nginx 
 docker images | grep -i repocurso
