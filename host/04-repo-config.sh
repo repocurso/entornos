@@ -21,8 +21,9 @@ echo
 docker images
 
 export DIR=$(pwd)
-if [ ! -d "$DIR/data" ]; then mkdir -p $DIR/data; fi
-if [ ! -f "$DIR/data/config.json" ]; then jq -c . $HOME/.docker/config.json > $DIR/data/config.json; fi
+if [ -d "$DIR/data" ]; then rm -rf $DIR/data; fi
+mkdir -p $DIR/data
+jq -c . $HOME/.docker/config.json > $DIR/data/config.json
 
 echo
 docker logout repocurso:9091
