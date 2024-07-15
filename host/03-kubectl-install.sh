@@ -26,7 +26,7 @@ type _init_completion
 echo 'source <(kubectl completion bash)' >> $HOME/.bashrc
 
 kubectl completion bash > ~/kubectl.completion
-sudo cp ~/kubectl.completion /etc/bash_completion.d/kubectl
+sudo mv ~/kubectl.completion /etc/bash_completion.d/kubectl
 sudo ls /etc/bash_completion.d/kubectl
 
 echo 'alias k=kubectl' >> ~/.bashrc 

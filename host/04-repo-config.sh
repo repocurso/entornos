@@ -24,6 +24,7 @@ export DIR=$(pwd)
 if [ -d "$DIR/data" ]; then rm -rf $DIR/data; fi
 mkdir -p $DIR/data
 jq -c . $HOME/.docker/config.json > $DIR/data/config.json
+chmod 400 $DIR/data/config.json
 
 echo
 docker logout repocurso:9091
