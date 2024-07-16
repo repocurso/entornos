@@ -12,7 +12,7 @@ SCRIPT
 
 Vagrant.configure('2') do |config|
   vm_box = 'bento/ubuntu-22.04'
-
+  config.vm.boot_timeout = 600
   config.vm.define :repository, primary: true  do |repository|
     repository.vm.box = vm_box
     repository.vm.box_check_update = true
