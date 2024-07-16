@@ -3,7 +3,7 @@
 docker exec -u root -it --privileged c1-control-plane /bin/bash -c 'cat << EOT | sh -
 kubectl create deployment deploy1 --image=repocurso:9091/nginx --replicas 3
 kubectl get pods -owide -l app=deploy1
-sleep 10
+kubectl wait --for=condition=available deployment/deploy1
 kubectl get pods -owide -l app=deploy1
 kubectl delete deployment deploy1
 EOT'

@@ -9,3 +9,6 @@ kubectl create secret generic registry-credential \
 --type=kubernetes.io/dockerconfigjson
 
 kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "registry-credential"}]}'
+
+rm -f config.json
+

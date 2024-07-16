@@ -9,6 +9,7 @@ KUBECONFIG=~/.kube/config:config kubectl config view --flatten > config-all
 
 mv ~/.kube/config ~/.kube/config.org
 cp ./config-all ~/.kube/config
+unset KUBECONFIG
 
 kubectl config get-contexts
 kubectl config rename-context kubernetes-admin@kubernetes k8s-c3

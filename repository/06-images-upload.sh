@@ -58,7 +58,7 @@ repocurso/nginx:v2
 repocurso/nginxhello:1.12.1
 repocurso/nginx-unprivileged:latest
 repocurso/perl:5.34.0
-repocurso/portainer:latest
+repocurso/portainer-ce:latest
 repocurso/portainer-agent:2.19.5
 repocurso/prometheus:latest
 repocurso/python:3.7-alpine

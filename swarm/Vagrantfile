@@ -27,7 +27,7 @@ SCRIPT
 
 Vagrant.configure('2') do |config|
   vm_box = 'bento/ubuntu-20.04'
-
+  config.vm.boot_timeout = 600
   config.vm.define :manager, primary: true  do |manager|
     manager.vm.box = vm_box
     manager.vm.box_check_update = true
