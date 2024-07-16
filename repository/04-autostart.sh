@@ -39,7 +39,7 @@ WantedBy=multi-user.target" | sudo tee /etc/systemd/system/autostart_vm@.service
 VBoxManage setproperty autostartdbpath /etc/vbox
 VBoxManage list vms
 VBoxManage controlvm repository acpipowerbutton
-sleep 10
+sleep 20
 VBoxManage modifyvm repository --autostart-enabled on
 
 sudo systemctl daemon-reload
