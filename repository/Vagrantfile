@@ -7,7 +7,7 @@ SCRIPT
 $repo_script = <<SCRIPT
 echo Repository Init...
 mkdir -p /nexus/nexus-data/instances && sudo chmod 777 -R /nexus/ && sudo setfacl -R -d -m u::rwx -m g::rwx -m o::rwx /nexus/
-docker run --name nexus --restart="always" -d -p 8081:8081 -p 9091:9091 -v /nexus/nexus-data:/nexus-data sonatype/nexus3
+docker run --name nexus --restart="always" -d -p 8081:8081 -p 9091:9091 -v /nexus/nexus-data:/nexus-data repocurso/nexus3
 SCRIPT
 
 Vagrant.configure('2') do |config|
