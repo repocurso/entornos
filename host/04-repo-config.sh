@@ -13,13 +13,6 @@ echo -n "192.168.100.200:9091 Connecting: "
 docker login 192.168.100.200:9091 --username admin --password container@13 2> /dev/null
 echo
 
-docker pull --quiet 192.168.100.200:9091/hello-world
-docker run --rm --quiet repocurso:9091/hello-world
-docker images 
-docker rmi repocurso:9091/hello-world 192.168.100.200:9091/hello-world > /dev/null
-echo
-docker images
-
 export DIR=$(pwd)
 if [ -d "$DIR/data" ]; then rm -rf $DIR/data; fi
 mkdir -p $DIR/data

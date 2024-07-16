@@ -96,7 +96,7 @@ for imagen in \$(cat repositorio.list); do
  docker push repocurso:9091/\$(basename \$imagen);
  docker rmi \$imagen;
  docker rmi repocurso:9091/\$(basename \$imagen);
- sleep 5;
+ sleep 10;
 done
 docker logout repocurso:9091
 EOT

@@ -21,7 +21,7 @@ echo Configuring Repository...
 echo "192.168.100.200 repocurso" >> /etc/hosts
 echo '{"insecure-registries": ["192.168.100.200:9091","repocurso:9091"]}' > /etc/docker/daemon.json
 systemctl restart docker
-docker login repocurso:9091 --username admin --password curso-k8s@20
+docker login repocurso:9091 --username admin --password container@13
 sed -i -e '$a10.100.199.200  manager' -e '$a10.100.199.201  worker01' -e '$a10.100.199.202  worker02' /etc/hosts
 SCRIPT
 
