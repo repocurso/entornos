@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install -y net-tools tree jq unzip dos2unix sshpass debootstrap
+sudo yum install -y net-tools tree jq unzip dos2unix sshpass debootstrap
 
 if [ -f /etc/selinux/config ]; then 
   sudo sed '/SELINUX=permissive/s/permissive/disabled/' /etc/selinux/config;
