@@ -1,5 +1,7 @@
 #!/bin/bash
 
+if [ ! -f $HOME/.ssh/id_rsa ]; then ssh-keygen -q -t rsa -f ~/.ssh/id_rsa -N "" <<< y > /dev/null; fi
+
 cat > prepare.txt << EOT
 vagrant
 EOT

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+if [ ! -f $HOME/.ssh/id_rsa ]; then ssh-keygen -q -t rsa -f ~/.ssh/id_rsa -N "" <<< y > /dev/null; fi
 export ID_RSA_PUB=$(cat ~/.ssh/id_rsa.pub)
 vagrant ssh -c "echo $ID_RSA_PUB | sudo tee -a /home/vagrant/.ssh/authorized_keys"
 

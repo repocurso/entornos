@@ -1,4 +1,4 @@
 #!/bin/bash
 
-vagrant up --no-tty 
+vagrant up --provider=libvirt --no-parallel
 
