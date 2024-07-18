@@ -1,10 +1,11 @@
 #!/bin/bash
 
 sudo sed -i '/repocurso/d' /etc/hosts
-echo -e "192.168.100.200\trepocurso.local\trepocurso" | sudo tee -a /etc/hosts
+echo "192.168.100.200\trepocurso.local\trepocurso" | sudo tee -a /etc/hosts
 
-echo -e {\"insecure-registries\": [\"192.168.100.200:9091\",\"repocurso:9091\"]} | sudo tee /etc/docker/daemon.json
+echo {\"insecure-registries\": [\"192.168.100.200:9091\",\"repocurso:9091\"]} | sudo tee /etc/docker/daemon.json
 echo "Docker Starting..."
+sudo systemctl daemon-reload
 sudo systemctl restart docker
 
 echo -n "repocurso:9091 Connecting: "
