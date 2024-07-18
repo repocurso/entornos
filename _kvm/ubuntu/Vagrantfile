@@ -4,11 +4,11 @@ Vagrant.configure('2') do |config|
   config.vm.define :ubuntu, primary: true  do |ubuntu|
     ubuntu.vm.box = vm_box
     ubuntu.vm.box_check_update = true
-    ubuntu.vm.network :private_network, ip: "192.168.33.12"
+    ubuntu.vm.network :private_network, ip: "192.168.100.12", :libvirt__domain_name => "curso.local"
     ubuntu.vm.hostname = "ubuntu"
     ubuntu.vm.synced_folder ".", "/vagrant"
-    ubuntu.vm.provider "virtualbox" do |vb|
-      vb.name = "docker-ubuntu"
+    ubuntu.vm.provider "libvirt" do |vb|
+      #vb.name = "docker-ubuntu"
       vb.memory = "1024"
       vb.cpus = "2"
     end
