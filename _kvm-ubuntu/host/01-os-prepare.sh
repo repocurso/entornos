@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install -y net-tools tree jq unzip dos2unix sshpass debootstrap selinux-utils policycoreutils
+sudo apt install -y net-tools tree jq unzip dos2unix sshpass debootstrap nfs-kernel-server selinux-utils policycoreutils
 
 if [ -f /etc/selinux/config ]; then 
   sudo sed -i '/SELINUX=permissive/s/permissive/disabled/' /etc/selinux/config;

@@ -20,3 +20,6 @@ function fssh() {
 alias ssh=fssh
 EOT
 
+source .bashrc
+cd -
+

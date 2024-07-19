@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp ~/curso/entornos/host/data/config.json .
+cp ~/shared/data/config.json .
 
 kubectl config use-context k8s-c1
 

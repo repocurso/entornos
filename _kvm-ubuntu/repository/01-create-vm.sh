@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p ~/curso/shared/repository/
+
 vagrant up --provider=libvirt 
 
 # --- Renombrar VM (kvm/libvirt)

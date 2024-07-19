@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p ~/curso/shared/centos/
+
 vagrant up --provider=libvirt 
 
 # --- Renombrar VM (kvm/libvirt)

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p ~/curso/shared/swarm/
+
 vagrant up --provider=libvirt --no-parallel
 
 # --- Renombrar VM (kvm/libvirt)
