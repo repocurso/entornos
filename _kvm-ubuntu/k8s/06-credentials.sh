@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp ~/curso/entornos/host/data/config.json .
+cp ~/shared/data/config.json .
 
 export DIR=$(pwd)
 if [ ! -d $DIR/kubeconfig ]; then mkdir -p $DIR/kubeconfig; fi

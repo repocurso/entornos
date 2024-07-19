@@ -2,8 +2,9 @@
 
 export KUBECONFIG=kubeconfig/config
 
-export DIR=/curso/entornos/k8s/kubeconfig
-cd $HOME/$DIR
+export DIR=./kubeconfig
+mkdir -p $DIR
+cd $DIR
 
 KUBECONFIG=~/.kube/config:config kubectl config view --flatten > config-all
 
