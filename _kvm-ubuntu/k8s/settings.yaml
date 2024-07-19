@@ -27,7 +27,7 @@ nodes:
 # Mount additional shared folders from the host into each virtual machine.
 # Note that the project directory is automatically mounted at /vagrant.
 shared_folders:
- - host_path: ~/shared/k8s
+ - host_path: ~/curso/shared/k8s
    vm_path: /vagrant
 software:
   box: bento/ubuntu-22.04
