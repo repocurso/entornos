@@ -4,7 +4,7 @@ Vagrant.configure('2') do |config|
   config.vm.define :ubuntu, primary: true  do |ubuntu|
     ubuntu.vm.box = vm_box
     ubuntu.vm.box_check_update = true
-    ubuntu.vm.network :private_network, ip: "192.168.100.12", :libvirt__domain_name => "curso.local"
+    ubuntu.vm.network :private_network, ip: "192.168.100.12", :libvirt__domain_name => "curso.local" :libvirt__dhcp_enabled => false, :libvirt__network_name => "red-entornos"
     ubuntu.vm.hostname = "ubuntu"
     ubuntu.vm.synced_folder ".", "/vagrant"
     ubuntu.vm.provider "libvirt" do |vb|
