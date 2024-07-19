@@ -4,9 +4,9 @@ Vagrant.configure('2') do |config|
   config.vm.define :centos, primary: true  do |centos|
     centos.vm.box = vm_box
     centos.vm.box_check_update = true
-    centos.vm.network :private_network, ip: "192.168.100.11", :libvirt__domain_name => "curso.local"
+    centos.vm.network :private_network, ip: "192.168.100.11", :libvirt__domain_name => "curso.local", :libvirt__dhcp_enabled => false, :libvirt__network_name => "red-entornos"
     centos.vm.hostname = "centos"
-    #centos.vm.synced_folder ".", "/vagrant"
+    centos.vm.synced_folder ".", "/vagrant", type: "rsync"
     centos.vm.provider "libvirt" do |vb|
       #vb.name = "docker-centos"
       vb.memory = "1024"

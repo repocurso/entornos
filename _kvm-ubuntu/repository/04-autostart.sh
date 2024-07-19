@@ -3,13 +3,14 @@
 # Arranque automático VM
 
 sudo virsh net-autostart vagrant-libvirt
-sudo virsh net-autostart repository0
-sudo virsh autostart repository_repository 
+sudo virsh net-autostart red-entornos
+sudo virsh autostart repository 
 
 virsh net-list --all
+virsh list --all
 
-virsh shutdown repository_repository
-virsh domrename repository_repository repository
+#virsh shutdown repository_repository
+#virsh domrename repository_repository repository
 
 sudo reboot
 
