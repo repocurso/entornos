@@ -19,7 +19,8 @@ network:
 nodes:
   control:
     cpu: 2
-    memory: 4096
+    #memory: 4096
+    memory: 6144
   workers:
     count: 2
     cpu: 1
