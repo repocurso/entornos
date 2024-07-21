@@ -1,7 +1,9 @@
 #!/bin/bash
 
-mkdir -p ~/curso/shared/repository/ && chmod 755 ~/curso/shared/repository/
+export DIR="$HOME/curso/shared/repository"
+mkdir -p $DIR && chmod 755 $DIR
 
-cp Vagrantfile.nexus Vagrantfile
+cp Vagrantfile.nexus $DIR/Vagrantfile
+cd $DIR
 vagrant up  
 
