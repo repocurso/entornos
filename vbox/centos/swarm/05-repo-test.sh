@@ -2,7 +2,8 @@
 
 for node in manager worker01 worker02; do
 ssh vagrant@$node sh -c 'cat << EOT | sh -
-docker login repocurso:9091 --username admin --password container@13
+echo "Demo Test Repository $HOSTNAME ...."
+docker login repocurso:9091 --username admin --password container@13 2> /dev/null
 docker run --rm repocurso:9091/hello-world
 docker images repocurso:9091/hello-world
 docker rmi repocurso:9091/hello-world
@@ -11,7 +12,8 @@ EOT';
 done
 
 ssh vagrant@manager sh -c 'cat << EOT | sh -
-docker login repocurso:9091 --username admin --password container@13
+echo "Demo Test Service $HOSTNAME ...."
+docker login repocurso:9091 --username admin --password container@13 2> /dev/null
 docker service create --name webserver --replicas 3 --with-registry-auth repocurso:9091/nginx:latest
 docker service ps webserver
 docker service rm webserver
@@ -22,6 +24,7 @@ sleep 5
 
 for node in manager worker01 worker02; do
 ssh vagrant@$node sh -c 'cat << EOT | sh -
+echo "Images Removing $HOSTNAME ...."
 docker images
 docker rmi $(docker images -q repocurso:9091/nginx)
 docker images

@@ -2,7 +2,7 @@
 
 export KUBECONFIG=kubeconfig/config
 
-export DIR=/curso/entornos/k8s/kubeconfig
+export DIR=/curso/entornos/vbox/centos/k8s/kubeconfig
 cd $HOME/$DIR
 
 KUBECONFIG=~/.kube/config:config kubectl config view --flatten > config-all

@@ -2,6 +2,7 @@
 
 for node in manager worker01 worker02; do
 ssh vagrant@$node sh -c 'cat << EOT | sudo sh - 
+echo "Repository Configuring $HOSTNAME ...."
 sed -i "/repocurso/d" /etc/hosts
 echo "192.168.100.200\trepocurso.local\trepocurso" >> /etc/hosts
 cat > /etc/docker/daemon.json << EOF

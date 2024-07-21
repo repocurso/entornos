@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ ! -f ~/curso/entornos/host/data/config.json ]; then echo "No existe el archivo de claves"; exit; fi
-export REPO_AUTH=$(jq -r '.auths["repocurso:9091"].auth' ~/curso/entornos/host/data/config.json)
+if [ ! -f ~/curso/entornos/vbox/centos/host/data/config.json ]; then echo "No existe el archivo de claves"; exit; fi
+export REPO_AUTH=$(jq -r '.auths["repocurso:9091"].auth' ~/curso/entornos/vbox/centos/host/data/config.json)
 
 for node in c1-control-plane c1-worker c1-worker2; do
 docker exec -u root -it --privileged -e REPO_AUTH=$REPO_AUTH $node /bin/bash -c 'cat << EOT | sudo sh - 
