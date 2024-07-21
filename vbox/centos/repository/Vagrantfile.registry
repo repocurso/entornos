@@ -7,7 +7,7 @@ SCRIPT
 $repo_script = <<SCRIPT
 echo Repository Init...
 sudo apt update && sudo apt-get install -y acl
-sudo mkdir -p /registry/data/ && sudo chmod 777 -R /registry/ && sudo setfacl -R -d -m u::rwx -m g::rwx -m o::rwx /registry/
+sudo mkdir -p /vagrant/registry/data/ && sudo chmod 777 -R /vagrant/registry/ && sudo setfacl -R -d -m u::rwx -m g::rwx -m o::rwx /vagrant/registry/
 echo "
 version: '3.8'
 
@@ -44,7 +44,7 @@ services:
       REGISTRY_HTTP_HEADERS_Access-Control-Expose-Headers: '[Docker-Content-Digest]'
       REGISTRY_STORAGE_DELETE_ENABLED: 'true'
     volumes:
-      - ./registry/data:/var/lib/registry
+      - /vagrant/registry/data:/var/lib/registry
     container_name: registry-server
 " | tee docker-compose.yml
 docker compose up -d
