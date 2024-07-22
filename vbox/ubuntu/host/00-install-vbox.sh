@@ -7,6 +7,6 @@ sudo apt update
 sudo apt install -y virtualbox-7.0
 vboxmanage -v | cut -dr -f1
 sudo usermod -aG vboxusers $USER
-echo "* 192.168.10.0/24" | sudo tee /etc/vbox/networks.conf
+echo "* 192.168.100.0/24" | sudo tee /etc/vbox/networks.conf
 
 sudo reboot

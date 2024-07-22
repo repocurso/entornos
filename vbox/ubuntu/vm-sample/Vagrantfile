@@ -1,0 +1,31 @@
+$install_docker_script = <<SCRIPT
+echo Installing Docker...
+curl -sSL https://get.docker.com/ | sh
+usermod -aG docker vagrant
+SCRIPT
+
+$configure_dns_script = <<SCRIPT
+echo Configuring DNS...
+echo "nameserver 8.8.8.8\nnameserver 8.8.4.4" | sudo tee /etc/resolv.conf
+SCRIPT
+
+Vagrant.configure('2') do |config|
+  vm_box = "bento/ubuntu-24.04"
+  config.vm.boot_timeout = 600
+  config.vm.define :ubuntu, primary: true  do |ubuntu|
+    ubuntu.vm.box = vm_box
+    ubuntu.vm.box_check_update = true
+    ubuntu.vm.network :public_network, bridge: "eth0"
+    #ubuntu.vm.network :private_network, type: "dhcp", auto_config: false
+    ubuntu.vm.hostname = "ubuntu-azure"
+    ubuntu.vm.synced_folder ".", "/vagrant"
+    #ubuntu.vm.provision "shell", inline: $install_docker_script, privileged: true
+    ubuntu.vm.provision "shell", inline: $configure_dns_script, privileged: true
+
+    ubuntu.vm.provider "virtualbox" do |vb|
+      vb.name = "ubuntu-azure"
+      vb.memory = "12000"
+      vb.cpus = "8"
+    end
+  end
+end
