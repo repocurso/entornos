@@ -9,4 +9,4 @@ vboxmanage -v | cut -dr -f1
 sudo usermod -aG vboxusers $USER
 echo "* 192.168.100.0/24" | sudo tee /etc/vbox/networks.conf
 
-sudo reboot
+#sudo reboot

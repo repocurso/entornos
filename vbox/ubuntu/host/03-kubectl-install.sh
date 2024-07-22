@@ -32,5 +32,5 @@ sudo ls /etc/bash_completion.d/kubectl
 echo 'alias k=kubectl' >> ~/.bashrc 
 echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc 
 
-sudo reboot
+#sudo reboot
 

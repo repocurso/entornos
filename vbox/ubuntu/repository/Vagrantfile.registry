@@ -1,0 +1,72 @@
+$install_docker_script = <<SCRIPT
+echo Docker Installing...
+curl -sSL https://get.docker.com/ | sh
+usermod -aG docker vagrant
+SCRIPT
+
+$repo_script = <<SCRIPT
+echo Repository Init...
+sudo apt update && sudo apt-get install -y acl
+sudo mkdir -p /vagrant/registry/data/ && sudo chmod 777 -R /vagrant/registry/ && sudo setfacl -R -d -m u::rwx -m g::rwx -m o::rwx /vagrant/registry/
+echo "
+version: '3.8'
+
+services:
+  registry-ui:
+    image: repocurso/docker-registry-ui:main
+    restart: always
+    ports:
+      - 9090:80
+    environment:
+      - SINGLE_REGISTRY=true
+      - REGISTRY_TITLE=Docker Registry UI
+      - DELETE_IMAGES=false
+      - SHOW_CONTENT_DIGEST=true
+      - NGINX_PROXY_PASS_URL=http://registry-server:5000
+      - SHOW_CATALOG_NB_TAGS=true
+      - CATALOG_MIN_BRANCHES=1
+      - CATALOG_MAX_BRANCHES=1
+      - TAGLIST_PAGE_SIZE=100
+      - REGISTRY_SECURED=false
+      - CATALOG_ELEMENTS_LIMIT=1000
+    container_name: registry-ui
+
+  registry-server:
+    image: repocurso/registry:2.8.2
+    restart: always
+    ports:
+      - 9091:5000
+    environment:
+      REGISTRY_HTTP_HEADERS_Access-Control-Origin: '[http://registry.example.com]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Methods: '[HEAD,GET,OPTIONS,DELETE]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Credentials: '[true]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Headers: '[Authorization,Accept,Cache-Control]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Expose-Headers: '[Docker-Content-Digest]'
+      REGISTRY_STORAGE_DELETE_ENABLED: 'true'
+    volumes:
+      - /vagrant/registry/data:/var/lib/registry
+    container_name: registry-server
+" | tee docker-compose.yml
+docker compose up -d
+SCRIPT
+
+Vagrant.configure('2') do |config|
+  vm_box = 'bento/ubuntu-22.04'
+  config.vm.boot_timeout = 600
+  config.vm.define :repository, primary: true  do |repository|
+    repository.vm.box = vm_box
+    repository.vm.box_check_update = true
+    repository.vm.network :private_network, ip: "192.168.100.200"
+      repository.vm.network :forwarded_port, guest: 9090, host: 9090
+      repository.vm.network :forwarded_port, guest: 9091, host: 9091
+    repository.vm.hostname = "repository"
+    repository.vm.synced_folder ".", "/vagrant", SharedFoldersEnableSymlinksCreate: false
+    repository.vm.provision "shell", inline: $install_docker_script, privileged: true
+    repository.vm.provision "shell", inline: $repo_script, privileged: true
+    repository.vm.provider "virtualbox" do |vb|
+      vb.name = "repository"
+      vb.memory = "4096"
+      vb.cpus = 4
+    end
+  end
+end
